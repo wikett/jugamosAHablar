@@ -1,0 +1,65 @@
+$font-stack:    Helvetica, sans-serif;
+$light-red-ochre: #E86551;
+$japanese-indigo: #254441;
+$emerald: #3D9B7F;
+$laurel: #B2B09B;
+$fiery-rose: #F15573;
+
+
+$politica: #7F382D;
+$estilo-de-vida: #D35C4A;
+$educacion: #5762D5;
+$antes-y-ahora: #ABC4AB;
+$religion: #DC7F9B;
+$sexo: #A04668;
+$menos-18: #857E61;
+$futuro: #FA9F42;
+$miscelanea-fantasia: #45062E;
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size:2rem;
+  color: $laurel;
+  background-color: $japanese-indigo;
+}
+
+.boton-politica {
+  background-color: $politica;
+  width:100%;
+}
+.boton-estilo-de-vida {
+  background-color: $estilo-de-vida;
+  width:100%;
+}
+.boton-educacion {
+  background-color: $educacion;
+  width:100%;
+}
+.boton-antes-y-ahora {
+  background-color: $antes-y-ahora;
+  width:100%;
+}
+.boton-religion {
+  background-color: $religion;
+  width:100%;
+}
+.boton-sexo {
+  background-color: $sexo;
+  width:100%;
+}
+.boton-menos-18 {
+  background-color: $menos-18;
+  width:100%;
+}
+.boton-futuro {
+  background-color: $futuro;
+  width:100%;
+}
+.boton-miscelanea-fantasia {
+  background-color: $miscelanea-fantasia;
+  width:100%;
+}
+.boton-estilo-de-vida {
+  background-color: $estilo-de-vida;
+  width:100%;
+}
