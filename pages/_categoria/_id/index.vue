@@ -63,8 +63,11 @@
             <v-layout wrap>
               <v-flex xs12>
                 <v-select
-                  :items="['Política', 'Estilo de Vida', 'Educación', 'Antes y Ahora',  'Religión', 'Sexo', 'Menos de 18', 'Futuro', 'Miscelanea Fantasía']"
+                  :items=categorias 
+                  item-text="c"
+                  item-value="v"
                   label="Categoria*"
+                  v-model=nuevaCategoria
                   required
                 ></v-select>
               </v-flex>
@@ -72,15 +75,18 @@
                 <v-textarea
                   name="nuevaFrase"
                   label="Crea una nueva frase"
+                  v-model=nuevaFrase
                 ></v-textarea>
               </v-flex>
               <v-flex xs12>
                 <v-select
-                  :items="['Anónimo', 'Usuario']"
+                  :items="['Anónimo']"
+                  v-model=tipoAutor
                   label="Autor*"
                   required
                 ></v-select>
               </v-flex>
+              <div v-show="tipoAutor=='Usuario'">
               <v-flex xs12>
                 <h5><span>Crear usuario</span> | <span style="color:gray;">Login</span></h5>
                 <v-text-field label="Usuario*" hint="Tu nombre artístico a la hora de crear frases" required></v-text-field>
@@ -94,6 +100,7 @@
               <v-flex xs12>
                 <v-text-field label="Repite Password*" type="password" required></v-text-field>
               </v-flex>
+              </div>
             </v-layout>
             <v-layout>
               <v-flex xs12>
@@ -110,7 +117,43 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1"  @click="dialog = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1"  @click="dialog = false">Guardar</v-btn>
+          <v-btn color="blue darken-1"
+            @click="crearAnonimo()"
+            :loading="loading"
+            :disabled="loading"
+          >Guardar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+     <v-dialog
+      v-model="dialogCreado"
+      width="500"
+    >
+      
+
+      <v-card>
+        <v-card-title
+          class="headline green lighten-2"
+          primary-title
+        >
+          ¡Muchas gracias!
+        </v-card-title>
+
+        <v-card-text style="font-size: 1.2rem;">
+          Gracias por colaborar con ¿Jugamos a Hablar?. Esperemos que tu frase sirva de conversación, inspiración, riñas o risas. El caso que sirva para que la gente pueda interactuar.
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            flat
+            @click="dialogCreado = false"
+          >
+            Cerrar
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -124,7 +167,13 @@ import axios from "axios";
 export default {
   data: () => ({
       dialog: false,
-      checkbox: true
+      dialogCreado: false,
+      checkbox: true,
+      tipoAutor: "",
+      loading: false,
+      nuevaFrase: "",
+      nuevaCategoria: "",      
+      categorias: [{c: 'Política', v: 0}, {c:'Estilo de Vida', v:1}, {c:'Educación', v:2}, {c:'Antes y Ahora', v:3}, {c:'Religión', v:4}, {c:'Sexo', v:5}, {c:'Menos de 18', v:6}, {c:'Futuro', v:7}, {c:'Miscelanea Fantasía', v:8}]
     }),
   watchQuery: true,
   asyncData({ params, error }) {
@@ -140,6 +189,28 @@ export default {
       });
   },
   methods: {
+    crearAnonimo: function(){
+      this.loading = true;
+      console.log(`this.nuevaCategoria: ${this.nuevaCategoria}`)
+      console.log(`this.nuevaFrase: ${this.nuevaFrase}`)
+      axios
+        .post('https://conversaciones-api.herokuapp.com/temas', 
+        {
+          	categoria: this.nuevaCategoria.v,
+	          frase: this.nuevaFrase,
+	          autor: "anónimo"
+        })
+        .then(response => {
+          this.loading = false;
+          this.dialog = false;
+          this.dialogCreado = true;
+          
+        })
+        .catch(error =>{
+          console.log(`error: ${error}`)
+        })
+      
+    },
      getCategoria: function(categoria){
       switch (categoria) {
         case 0:
