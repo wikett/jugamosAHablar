@@ -37,14 +37,18 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/vuetify'
+    '@/plugins/vuetify',
+    { src: '@/plugins/ga.js', ssr: false }
   ],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    ['@nuxtjs/google-adsense', {
+      id: 'ca-pub-7593479892835011'
+    }]
   ],
 
   /*
