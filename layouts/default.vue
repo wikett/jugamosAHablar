@@ -58,14 +58,16 @@
       flat
       tile
     >
-      <v-card-title class="teal">
-        <strong class="subheading">Publicidad</strong>
-
-        <v-spacer></v-spacer>
-      </v-card-title>
-
-      <v-card-actions class="grey darken-3 justify-left texto-footer">
-        &copy;2019
+    <v-container>
+      <v-layout align-center justify-center row wrap>
+        <v-flex x12 class="text-xs-center">
+          <adsbygoogle />
+        </v-flex>
+      </v-layout>
+    </v-container>
+    
+     <v-card-actions class="grey darken-3 justify-left texto-footer">
+        <span class="caption">&copy; ¿Jugamos a hablar? 2019</span>
       </v-card-actions>
     </v-card>
   </v-footer>

@@ -47,7 +47,8 @@ module.exports = {
   modules: [
     '@nuxtjs/pwa',
     ['@nuxtjs/google-adsense', {
-      id: 'ca-pub-7593479892835011'
+      id: 'ca-pub-7593479892835011',
+      pageLevelAds: true
     }]
   ],
 
